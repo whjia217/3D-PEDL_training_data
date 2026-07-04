@@ -36,15 +36,15 @@ data/
 
 ### 1. Training Datasets (5,000 realizations per case)
 - **Fracture Fields (`train_fracture_fields_*.npy`)**: 
-  - **Dimensions**: `[5000, Nx, Ny, Nz]` representing the full 3D spatial grids of log-hydraulic conductivity ($\ln K$) or binary fracture indicators generated via stochastic fracture network simulation.
+  - **Dimensions**: `[5000, Nz, Ny, Nx]` representing the full 3D spatial grids of log-hydraulic conductivity ($\ln K$) or binary fracture indicators generated via stochastic fracture network simulation. Nz = 3; Ny = Nx =64
 - **Head Observations (`train_head_transient_medium_*.npy`)**: 
-  - **Dimensions**: `[5000, Nt, Nx, Ny, Nz]`.
+  - **Dimensions**: `[5000, C_in, Ny, Nx]`.
   - **Physical Meaning**: Data Characteristics: To maintain spatial consistency for deep learning alignment, these files retain the full 3D grid size (Nx * Ny * Nz). True hydraulic head values are provided only at the specific grid locations corresponding to the observation wells, while all remaining unmonitored grid cells are padded with 0.
-  - `Nt` represents the number of sequential transient logging time steps.
+  - C_in=Nz * N_inj * N_t, capturing transient head responses to N_inj = 5 individual well injections across Nz=3 layers and N_t=11 time steps. 
 
 ### 2. Reference Benchmarks
 - **Reference Fields (`reference_fracture_field_*.npy`)**: 
-  - The true underlying 3D structural target `[1, Nx, Ny, Nz]` that the trained 3D-PEDL model aims to reconstruct during the validation phase.
+  - The true underlying 3D structural target `[1, Nz, Ny, Nx]` that the trained 3D-PEDL model aims to reconstruct during the validation phase.
 - **Reference Observations (`reference_head_transient_medium_*.npy`)**: 
-  - **Dimensions**: `[1, Nt, Nx, Ny, Nz]`.
+  - **Dimensions**: `[1, C_in, Ny, Nx]`.
   - The actual sparse transient hydraulic heads sampled **exclusively at the observation well locations** from the reference field, serving as the conditioning inputs for inversion. 
