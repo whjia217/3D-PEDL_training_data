@@ -15,22 +15,39 @@ To keep the repository efficient and focused, this repository provides the compl
 
 ## Dataset Structure
 
-All files are stored in the **NumPy array (`.npy`)** format.
+The dataset files are structured as follows:
 
 ```text
 data/
 ├── simple_case/
-│   ├── train_fracture_fields_simple.npy              # 5,000 synthetic 3D hydraulic conductivity fields
-│   ├── train_head_transient_medium_simple.npy        # 5,000 transient head observation fields (Medium Density)
-│   ├── reference_fracture_field_simple.npy           # The true reference lnK field used for inversion testing
+│   ├── train_fracture_fields_simple.npz              # 5,000 synthetic 3D hydraulic conductivity fields
+│   ├── train_head_transient_medium_simple.npz        # 5,000 transient head observation fields (Medium Density)
+│   ├── reference_fracture_field_simple.npz           # The true reference lnK field used for inversion testing
 │   └── reference_head_transient_medium_simple.npy     # The actual dynamic heads observed from the reference field
 │
 └── complex_case/
-    ├── train_fracture_fields_complex.npy             # 5,000 synthetic 3D hydraulic conductivity fields
-    ├── train_head_transient_medium_complex.npy       # 5,000 transient head observation fields (Medium Density)
-    ├── reference_fracture_field_complex.npy          # The true reference lnK field used for inversion testing
-    └── reference_head_transient_medium_complex.npy    # The actual dynamic heads observed from the reference field
+    ├── train_fracture_fields_complex.npz             # 5,000 synthetic 3D hydraulic conductivity fields
+    ├── train_head_transient_medium_complex.npz       # 5,000 transient head observation fields (Medium Density)
+    ├── reference_fracture_field_complex.npz          # The true reference lnK field used for inversion testing
+    └── reference_head_transient_medium_complex.npz    # The actual dynamic heads observed from the reference field
 ```
+## How to Use
+To load and process these .npz datasets, you will need Python with the numpy library installed:
+pip install numpy
+
+Loading Data Example (Python)
+Since the data is saved as a compressed archive, you need to call the array via its internal key (set as 'data'). Here is the standard way to load it:
+Python
+import numpy as np
+#### 1. Load the compressed .npz file
+compressed_fracture = np.load('data/simple_case/train_fracture_fields_simple.npz')
+compressed_head = np.load('data/simple_case/train_head_transient_medium_simple.npz')
+#### 2. Extract the actual 3D NumPy arrays using the 'data' key
+fracture_fields = compressed_fracture['data']
+head_obs = compressed_head['data']
+print("Data loaded and extracted successfully!")
+print(f"Fracture fields shape: {fracture_fields.shape} (Expect: `[5000, Nz, Ny, Nx]`)")
+print(f"Transient head obs shape: {head_obs.shape} (Expect: `[5000, C_in, Ny, Nx]`)") 
 
 ## Data Descriptions
 
