@@ -12,7 +12,15 @@ To keep the repository efficient and focused, this repository provides the compl
 *(For datasets under other observation densities or steady-state scenarios, please contact the corresponding author upon reasonable request.)*
 
 ---
+## Dataset Availability & Size Note
 
+To balance repository efficiency and comply with GitHub's storage limitations, the data distribution is managed as follows:
+1. **Publicly Hosted in this Repo**: We provide the complete compressed 3D spatial inputs, including the **5,000 synthetic fracture fields**，the **true reference fields** and the **reference_head_transient_medium_** for both the **Simple Case** and **Complex Case**.
+2. **Available Upon Request**: The corresponding transient hydraulic head observation datasets (`train_head_transient_medium_*.npy`), which retain the full 3D transient simulation grids, exceed the 100MB/GB hosting capacity of GitHub. 
+
+**How to obtain the full head observation data:** The full simulation datasets are securely archived. Researchers and reviewers can instantly obtain them by contacting the corresponding author (**Prof. Shujun Ye** at `sjye@nju.edu.cn`) upon reasonable request.
+
+---
 ## Dataset Structure
 
 The dataset files are structured as follows:
@@ -21,16 +29,17 @@ The dataset files are structured as follows:
 data/
 ├── simple_case/
 │   ├── train_fracture_fields_simple.npz              # 5,000 synthetic 3D hydraulic conductivity fields
-│   ├── train_head_transient_medium_simple.npz        # 5,000 transient head observation fields (Medium Density)
+│   ├── train_head_transient_medium_simple.npz        # 5,000 transient head observation fields (Medium Density), Available Upon Request
 │   ├── reference_fracture_field_simple.npz           # The true reference lnK field used for inversion testing
 │   └── reference_head_transient_medium_simple.npz     # The actual dynamic heads observed from the reference field
 │
 └── complex_case/
     ├── train_fracture_fields_complex.npz             # 5,000 synthetic 3D hydraulic conductivity fields
-    ├── train_head_transient_medium_complex.npz       # 5,000 transient head observation fields (Medium Density)
+    ├── train_head_transient_medium_complex.npz       # 5,000 transient head observation fields (Medium Density), Available Upon Request
     ├── reference_fracture_field_complex.npz          # The true reference lnK field used for inversion testing
     └── reference_head_transient_medium_complex.npz    # The actual dynamic heads observed from the reference field
 ```
+
 ## How to Use
 To load and process these .npz datasets, you will need Python with the numpy library installed:
 pip install numpy
