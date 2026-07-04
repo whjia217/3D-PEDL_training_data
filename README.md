@@ -23,7 +23,7 @@ data/
 │   ├── train_fracture_fields_simple.npz              # 5,000 synthetic 3D hydraulic conductivity fields
 │   ├── train_head_transient_medium_simple.npz        # 5,000 transient head observation fields (Medium Density)
 │   ├── reference_fracture_field_simple.npz           # The true reference lnK field used for inversion testing
-│   └── reference_head_transient_medium_simple.npy     # The actual dynamic heads observed from the reference field
+│   └── reference_head_transient_medium_simple.npz     # The actual dynamic heads observed from the reference field
 │
 └── complex_case/
     ├── train_fracture_fields_complex.npz             # 5,000 synthetic 3D hydraulic conductivity fields
